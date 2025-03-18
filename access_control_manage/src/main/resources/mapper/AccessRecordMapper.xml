@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cy.mapper.AccessRecordMapper">
+
+    <select id="recordList" resultType="cn.cy.vo.UserInfoVO">
+        SELECT ui.student_id ,ui.sex ,ui.name ,ui.college ,ui.phone ,ui.major ,ar.join_time ,ar .out_time ,ar.id as record_id
+        from access_record ar left join user_info ui on ar.user_id = ui.id
+        <where>
+            <if test="param1.name != null and param1.name!=''">
+                and ui.name like concat('%',#{param1.name},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
